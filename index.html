@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Pixel Wallet Mini App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="top-bar pixel-border">
+        <div>
+          <p class="label">Wallet</p>
+          <h1>PIXEL PAY</h1>
+        </div>
+        <button id="themeToggle" class="icon-btn" aria-label="Сменить тему">◐</button>
+      </header>
+
+      <main class="content" id="content">
+        <section class="screen active" data-screen="home">
+          <article class="balance-card pixel-border">
+            <p class="label">Общий баланс</p>
+            <p class="balance" id="totalBalance">$4,260.15</p>
+            <div class="chip-row">
+              <span class="chip positive" id="profitChip">+2.6% за 24ч</span>
+              <span class="chip">USDT • TON • BTC</span>
+            </div>
+          </article>
+
+          <section class="quick-actions">
+            <button class="action-btn pixel-border" data-open="send">Отправить</button>
+            <button class="action-btn pixel-border" data-open="receive">Получить</button>
+            <button class="action-btn pixel-border" data-open="swap">Swap</button>
+            <button class="action-btn pixel-border" data-open="cards">Карты</button>
+          </section>
+
+          <section class="asset-list pixel-border">
+            <h2>Активы</h2>
+            <ul id="assetList"></ul>
+          </section>
+        </section>
+
+        <section class="screen" data-screen="send">
+          <h2>Отправить</h2>
+          <form id="sendForm" class="pixel-form pixel-border">
+            <label>
+              Валюта
+              <select id="sendAsset"></select>
+            </label>
+            <label>
+              Адрес
+              <input id="recipient" type="text" placeholder="UQ... / 0x..." required />
+            </label>
+            <label>
+              Сумма
+              <input id="amount" type="number" min="0.0001" step="0.0001" placeholder="0.00" required />
+            </label>
+            <button type="submit" class="primary">Подтвердить</button>
+          </form>
+        </section>
+
+        <section class="screen" data-screen="receive">
+          <h2>Получить</h2>
+          <article class="pixel-border receive-card">
+            <p>Ваш адрес</p>
+            <code id="walletAddress">UQX4...9Vp9</code>
+            <button id="copyAddress" class="primary">Скопировать</button>
+            <div class="qr-fake" aria-hidden="true"></div>
+          </article>
+        </section>
+
+        <section class="screen" data-screen="swap">
+          <h2>Swap</h2>
+          <form id="swapForm" class="pixel-form pixel-border">
+            <label>Из
+              <select id="swapFrom"></select>
+            </label>
+            <label>В
+              <select id="swapTo"></select>
+            </label>
+            <label>Сумма
+              <input id="swapAmount" type="number" min="0.0001" step="0.0001" placeholder="0.00" required />
+            </label>
+            <p class="hint" id="swapPreview">Курс загрузится автоматически</p>
+            <button class="primary" type="submit">Выполнить swap</button>
+          </form>
+        </section>
+
+        <section class="screen" data-screen="cards">
+          <h2>Карты</h2>
+          <article class="virtual-card pixel-border">
+            <p class="label">Virtual Pixel Card</p>
+            <p class="card-number">5353 •••• •••• 2026</p>
+            <div class="card-row">
+              <span>EXP 06/30</span>
+              <span>CVV ***</span>
+            </div>
+          </article>
+          <button id="freezeCard" class="danger">Заморозить карту</button>
+        </section>
+
+        <section class="screen" data-screen="history">
+          <h2>История</h2>
+          <ul id="historyList" class="history pixel-border"></ul>
+        </section>
+      </main>
+
+      <nav class="tabbar pixel-border">
+        <button data-tab="home" class="active">Главная</button>
+        <button data-tab="history">История</button>
+        <button data-tab="send">Отправка</button>
+        <button data-tab="receive">Получить</button>
+      </nav>
+
+      <div id="toast" role="status" aria-live="polite"></div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
